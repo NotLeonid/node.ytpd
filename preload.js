@@ -1,6 +1,6 @@
 process.on("uncaughtException",(e)=>{console.error(e);});
 
-const ytdl=require("ytdl-core");
+const ytdl=require("@distube/ytdl-core");
 const ffmpegPath=require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg=require("fluent-ffmpeg");
 ffmpeg.setFfmpegPath(ffmpegPath);
@@ -37,6 +37,7 @@ document.querySelector("#progress div").style.width=`${percentage}%`;
 document.querySelector("#progress h3").innerText=`${downloaded}/${total} (${percentage}%)`;
 if(downloadedInChunk>=simultaneousLimit){chunkDownloadStarted=false;}
 }).on("error",err=>{
+console.log(err);
 retryCount++;
 if(retryCount>3){
 downloaded++;
