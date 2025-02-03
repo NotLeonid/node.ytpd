@@ -28,8 +28,8 @@ var retryCount=0;
 var downloading=false;
 
 async function download(url,output){
-var stream=ytdl(url,{filter:"audioonly"});
-ffmpeg(stream).audioBitrate(320).save(`${downloadPath}/${output}`).on("end",()=>{
+var stream=ytdl(url,{filter:"audioonly",fmt:"mp3",highWaterMark:1<<62,bitrate:256,quality:"highestaudio"});
+ffmpeg(stream).audioBitrate(256).save(`${downloadPath}/${output}`).on("end",()=>{
 downloaded++;
 downloadedInChunk++;
 var percentage=((downloaded/total)*100).toFixed(2);
